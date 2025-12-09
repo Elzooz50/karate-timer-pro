@@ -63,10 +63,10 @@ const Timer = ({ duration, onDurationChange }: TimerProps) => {
   const isTimeUp = timeLeft === 0;
 
   return (
-    <div className="flex flex-col items-center gap-6">
+    <div className="flex flex-col items-center gap-2 md:gap-4">
       {/* Timer Display */}
       <div
-        className={`timer-display text-6xl md:text-8xl lg:text-9xl font-black tracking-wider ${
+        className={`timer-display text-4xl md:text-6xl font-black tracking-wider ${
           isTimeUp
             ? "text-destructive"
             : isLowTime
@@ -78,38 +78,38 @@ const Timer = ({ duration, onDurationChange }: TimerProps) => {
       </div>
 
       {/* Controls */}
-      <div className="flex items-center gap-4">
+      <div className="flex items-center gap-2 md:gap-3">
         <button
           onClick={toggleTimer}
-          className={`w-16 h-16 md:w-20 md:h-20 rounded-full flex items-center justify-center transition-all duration-200 ${
+          className={`w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-200 ${
             isRunning
               ? "bg-warning-orange hover:bg-warning-orange/80"
               : "bg-green-500 hover:bg-green-400"
           }`}
         >
           {isRunning ? (
-            <Pause className="w-8 h-8 md:w-10 md:h-10 text-white" />
+            <Pause className="w-5 h-5 md:w-8 md:h-8 text-white" />
           ) : (
-            <Play className="w-8 h-8 md:w-10 md:h-10 text-white ml-1" />
+            <Play className="w-5 h-5 md:w-8 md:h-8 text-white ml-0.5" />
           )}
         </button>
 
         <button
           onClick={resetTimer}
-          className="w-14 h-14 md:w-16 md:h-16 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-all duration-200"
+          className="w-10 h-10 md:w-14 md:h-14 rounded-full bg-secondary hover:bg-secondary/80 flex items-center justify-center transition-all duration-200"
         >
-          <RotateCcw className="w-6 h-6 md:w-8 md:h-8 text-foreground" />
+          <RotateCcw className="w-4 h-4 md:w-6 md:h-6 text-foreground" />
         </button>
       </div>
 
       {/* Duration Selector */}
-      <div className="flex gap-2 md:gap-3">
+      <div className="flex gap-1 md:gap-2">
         {durations.map((d) => (
           <button
             key={d.seconds}
             onClick={() => onDurationChange(d.seconds)}
             disabled={isRunning}
-            className={`px-4 py-2 md:px-6 md:py-3 rounded-lg font-display font-bold text-sm md:text-base transition-all duration-200 ${
+            className={`px-2 py-1 md:px-4 md:py-2 rounded-md font-display font-bold text-xs md:text-sm transition-all duration-200 ${
               duration === d.seconds
                 ? "bg-timer-gold text-black"
                 : "bg-secondary text-foreground hover:bg-accent"
