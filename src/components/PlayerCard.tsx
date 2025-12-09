@@ -5,9 +5,11 @@ interface PlayerCardProps {
   type: "aka" | "ao";
   score: number;
   warnings: number;
+  hasSensho: boolean;
   onAddPoints: (points: number) => void;
   onAddWarning: () => void;
   onRemoveWarning: () => void;
+  onToggleSensho: () => void;
 }
 
 const getWarningLabel = (level: number): string => {
@@ -21,9 +23,11 @@ const PlayerCard = ({
   type,
   score,
   warnings,
+  hasSensho,
   onAddPoints,
   onAddWarning,
   onRemoveWarning,
+  onToggleSensho,
 }: PlayerCardProps) => {
   const [isScoreAnimating, setIsScoreAnimating] = useState(false);
   const isAka = type === "aka";
@@ -40,10 +44,22 @@ const PlayerCard = ({
     <div
       className={`${isAka ? "aka-card" : "ao-card"} rounded-2xl p-6 md:p-8 flex flex-col items-center gap-4 md:gap-6 min-w-[280px] md:min-w-[320px]`}
     >
-      {/* Player Name */}
-      <h2 className="font-display text-2xl md:text-3xl font-bold text-white tracking-wider">
-        {name}
-      </h2>
+      {/* Player Name & Sensho */}
+      <div className="flex items-center gap-3">
+        <h2 className="font-display text-2xl md:text-3xl font-bold text-white tracking-wider">
+          {name}
+        </h2>
+        <button
+          onClick={onToggleSensho}
+          className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-200 ${
+            hasSensho
+              ? "bg-sensho text-black shadow-[0_0_12px_hsl(var(--sensho)/0.6)]"
+              : "bg-white/20 text-white/60 hover:bg-white/30"
+          }`}
+        >
+          先取
+        </button>
+      </div>
 
       {/* Score Display */}
       <div

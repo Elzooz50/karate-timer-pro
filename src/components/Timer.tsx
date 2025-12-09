@@ -11,6 +11,7 @@ const Timer = ({ duration, onDurationChange }: TimerProps) => {
   const [isRunning, setIsRunning] = useState(false);
 
   const durations = [
+    { label: "1:00", seconds: 60 },
     { label: "1:30", seconds: 90 },
     { label: "2:00", seconds: 120 },
     { label: "3:00", seconds: 180 },
