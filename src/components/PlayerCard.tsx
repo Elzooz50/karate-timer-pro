@@ -42,16 +42,16 @@ const PlayerCard = ({
 
   return (
     <div
-      className={`${isAka ? "aka-card" : "ao-card"} rounded-2xl p-6 md:p-8 flex flex-col items-center gap-4 md:gap-6 min-w-[280px] md:min-w-[320px]`}
+      className={`${isAka ? "aka-card" : "ao-card"} rounded-xl p-3 md:p-6 flex flex-col items-center gap-2 md:gap-4 w-full max-w-[320px]`}
     >
       {/* Player Name & Sensho */}
-      <div className="flex items-center gap-3">
-        <h2 className="font-display text-2xl md:text-3xl font-bold text-white tracking-wider">
+      <div className="flex items-center gap-2">
+        <h2 className="font-display text-lg md:text-2xl font-bold text-white tracking-wider">
           {name}
         </h2>
         <button
           onClick={onToggleSensho}
-          className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide transition-all duration-200 ${
+          className={`px-2 py-0.5 rounded-full text-[10px] md:text-xs font-bold uppercase tracking-wide transition-all duration-200 ${
             hasSensho
               ? "bg-sensho text-black shadow-[0_0_12px_hsl(var(--sensho)/0.6)]"
               : "bg-white/20 text-white/60 hover:bg-white/30"
@@ -63,7 +63,7 @@ const PlayerCard = ({
 
       {/* Score Display */}
       <div
-        className={`font-display text-7xl md:text-9xl font-black text-white ${
+        className={`font-display text-5xl md:text-8xl font-black text-white ${
           isScoreAnimating ? "animate-score-pop" : ""
         }`}
       >
@@ -71,14 +71,14 @@ const PlayerCard = ({
       </div>
 
       {/* Point Buttons */}
-      <div className="flex gap-3 md:gap-4">
+      <div className="flex gap-2 md:gap-3">
         {[1, 2, 3].map((points) => (
           <button
             key={points}
             onClick={() => onAddPoints(points)}
             className={`${
               isAka ? "point-btn-aka" : "point-btn-ao"
-            } w-14 h-14 md:w-16 md:h-16 rounded-xl text-xl md:text-2xl text-white`}
+            } w-11 h-11 md:w-14 md:h-14 rounded-lg text-lg md:text-xl text-white`}
           >
             +{points}
           </button>
@@ -86,23 +86,23 @@ const PlayerCard = ({
       </div>
 
       {/* Warnings Section */}
-      <div className="w-full mt-2">
-        <div className="flex items-center justify-between mb-3">
-          <span className="text-white/80 font-medium text-sm uppercase tracking-wide">
+      <div className="w-full">
+        <div className="flex items-center justify-between mb-1 md:mb-2">
+          <span className="text-white/80 font-medium text-[10px] md:text-sm uppercase tracking-wide">
             Warnings
           </span>
-          <div className="flex gap-2">
+          <div className="flex gap-1">
             <button
               onClick={onRemoveWarning}
               disabled={warnings === 0}
-              className="w-8 h-8 rounded-lg bg-white/10 text-white font-bold hover:bg-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-6 h-6 md:w-8 md:h-8 rounded-md bg-white/10 text-white font-bold text-sm hover:bg-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             >
               −
             </button>
             <button
               onClick={onAddWarning}
               disabled={warnings >= 5}
-              className="w-8 h-8 rounded-lg bg-white/10 text-white font-bold hover:bg-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="w-6 h-6 md:w-8 md:h-8 rounded-md bg-white/10 text-white font-bold text-sm hover:bg-white/20 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
             >
               +
             </button>
@@ -110,7 +110,7 @@ const PlayerCard = ({
         </div>
 
         {/* Warning Indicators */}
-        <div className="flex gap-2 justify-center">
+        <div className="flex gap-1 md:gap-2 justify-center">
           {[1, 2, 3, 4, 5].map((level) => {
             const isActive = warnings >= level;
             let bgColor = "bg-white/20";
@@ -127,7 +127,7 @@ const PlayerCard = ({
             return (
               <div
                 key={level}
-                className={`warning-indicator w-10 h-10 md:w-12 md:h-12 rounded-lg flex items-center justify-center font-display font-bold text-xs md:text-sm ${
+                className={`warning-indicator w-8 h-8 md:w-10 md:h-10 rounded-md flex items-center justify-center font-display font-bold text-[10px] md:text-xs ${
                   isActive ? `${activeColor} warning-active` : bgColor
                 }`}
               >
@@ -139,9 +139,9 @@ const PlayerCard = ({
 
         {/* Current Warning Label */}
         {warnings > 0 && (
-          <div className="mt-3 text-center">
+          <div className="mt-1 md:mt-2 text-center">
             <span
-              className={`font-display font-bold text-sm md:text-base px-4 py-1 rounded-full ${
+              className={`font-display font-bold text-[10px] md:text-sm px-2 py-0.5 rounded-full ${
                 warnings <= 3
                   ? "bg-warning-yellow text-black"
                   : warnings === 4
