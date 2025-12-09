@@ -69,6 +69,7 @@ export default {
           orange: "hsl(var(--warning-orange))",
           red: "hsl(var(--warning-red))",
         },
+        sensho: "hsl(var(--sensho))",
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
           foreground: "hsl(var(--sidebar-foreground))",

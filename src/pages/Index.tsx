@@ -8,6 +8,7 @@ const Index = () => {
   const [aoScore, setAoScore] = useState(0);
   const [akaWarnings, setAkaWarnings] = useState(0);
   const [aoWarnings, setAoWarnings] = useState(0);
+  const [sensho, setSensho] = useState<"aka" | "ao" | null>(null);
   const [timerDuration, setTimerDuration] = useState(120); // 2 minutes default
 
   const handleAkaAddPoints = useCallback((points: number) => {
@@ -34,11 +35,20 @@ const Index = () => {
     setAoWarnings((prev) => Math.max(prev - 1, 0));
   }, []);
 
+  const handleToggleAkaSensho = useCallback(() => {
+    setSensho((prev) => (prev === "aka" ? null : "aka"));
+  }, []);
+
+  const handleToggleAoSensho = useCallback(() => {
+    setSensho((prev) => (prev === "ao" ? null : "ao"));
+  }, []);
+
   const resetMatch = useCallback(() => {
     setAkaScore(0);
     setAoScore(0);
     setAkaWarnings(0);
     setAoWarnings(0);
+    setSensho(null);
   }, []);
 
   return (
@@ -64,25 +74,27 @@ const Index = () => {
           <Timer duration={timerDuration} onDurationChange={setTimerDuration} />
         </section>
 
-        {/* Players Section */}
+        {/* Players Section - AO on left, AKA on right */}
         <section className="w-full flex flex-col lg:flex-row items-center justify-center gap-6 md:gap-8 lg:gap-16">
           <PlayerCard
-            name="AKA"
-            type="aka"
-            score={akaScore}
-            warnings={akaWarnings}
-            onAddPoints={handleAkaAddPoints}
-            onAddWarning={handleAkaAddWarning}
-            onRemoveWarning={handleAkaRemoveWarning}
+            name="AO"
+            type="ao"
+            score={aoScore}
+            warnings={aoWarnings}
+            hasSensho={sensho === "ao"}
+            onAddPoints={handleAoAddPoints}
+            onAddWarning={handleAoAddWarning}
+            onRemoveWarning={handleAoRemoveWarning}
+            onToggleSensho={handleToggleAoSensho}
           />
 
           {/* VS Divider */}
           <div className="hidden lg:flex flex-col items-center gap-4">
-            <div className="w-px h-16 bg-gradient-to-b from-aka via-muted to-ao" />
+            <div className="w-px h-16 bg-gradient-to-b from-ao via-muted to-aka" />
             <span className="font-display text-2xl font-bold text-muted-foreground">
               VS
             </span>
-            <div className="w-px h-16 bg-gradient-to-b from-ao via-muted to-aka" />
+            <div className="w-px h-16 bg-gradient-to-b from-aka via-muted to-ao" />
           </div>
 
           <div className="lg:hidden font-display text-xl font-bold text-muted-foreground">
@@ -90,13 +102,15 @@ const Index = () => {
           </div>
 
           <PlayerCard
-            name="AO"
-            type="ao"
-            score={aoScore}
-            warnings={aoWarnings}
-            onAddPoints={handleAoAddPoints}
-            onAddWarning={handleAoAddWarning}
-            onRemoveWarning={handleAoRemoveWarning}
+            name="AKA"
+            type="aka"
+            score={akaScore}
+            warnings={akaWarnings}
+            hasSensho={sensho === "aka"}
+            onAddPoints={handleAkaAddPoints}
+            onAddWarning={handleAkaAddWarning}
+            onRemoveWarning={handleAkaRemoveWarning}
+            onToggleSensho={handleToggleAkaSensho}
           />
         </section>
       </main>
