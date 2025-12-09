@@ -108,20 +108,18 @@ const Index = () => {
           <Timer duration={timerDuration} onDurationChange={setTimerDuration} />
         </section>
 
-        {/* Players Section - AKA on top (mobile), AO on left (desktop) */}
-        <section className="w-full flex flex-col lg:flex-row items-center justify-center gap-2 md:gap-6 lg:gap-12">
-          {/* AKA first on mobile (appears on top), second on desktop */}
-          <div className="order-1 lg:order-2 w-full flex justify-center">
+          {/* AO second on mobile (appears on bottom), first on desktop */}
+          <div className="order-3 lg:order-1 w-full flex justify-center">
             <PlayerCard
-              name="AKA"
-              type="aka"
-              score={akaScore}
-              warnings={akaWarnings}
-              hasSensho={sensho === "aka"}
-              onAddPoints={handleAkaAddPoints}
-              onAddWarning={handleAkaAddWarning}
-              onRemoveWarning={handleAkaRemoveWarning}
-              onToggleSensho={handleToggleAkaSensho}
+              name="AO"
+              type="ao"
+              score={aoScore}
+              warnings={aoWarnings}
+              hasSensho={sensho === "ao"}
+              onAddPoints={handleAoAddPoints}
+              onAddWarning={handleAoAddWarning}
+              onRemoveWarning={handleAoRemoveWarning}
+              onToggleSensho={handleToggleAoSensho}
             />
           </div>
 
@@ -138,18 +136,21 @@ const Index = () => {
             VS
           </div>
 
-          {/* AO second on mobile (appears on bottom), first on desktop */}
-          <div className="order-3 lg:order-1 w-full flex justify-center">
+
+                {/* Players Section - AKA on top (mobile), AO on left (desktop) */}
+        <section className="w-full flex flex-col lg:flex-row items-center justify-center gap-2 md:gap-6 lg:gap-12">
+          {/* AKA first on mobile (appears on top), second on desktop */}
+          <div className="order-1 lg:order-2 w-full flex justify-center">
             <PlayerCard
-              name="AO"
-              type="ao"
-              score={aoScore}
-              warnings={aoWarnings}
-              hasSensho={sensho === "ao"}
-              onAddPoints={handleAoAddPoints}
-              onAddWarning={handleAoAddWarning}
-              onRemoveWarning={handleAoRemoveWarning}
-              onToggleSensho={handleToggleAoSensho}
+              name="AKA"
+              type="aka"
+              score={akaScore}
+              warnings={akaWarnings}
+              hasSensho={sensho === "aka"}
+              onAddPoints={handleAkaAddPoints}
+              onAddWarning={handleAkaAddWarning}
+              onRemoveWarning={handleAkaRemoveWarning}
+              onToggleSensho={handleToggleAkaSensho}
             />
           </div>
         </section>
