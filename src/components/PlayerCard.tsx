@@ -14,8 +14,8 @@ interface PlayerCardProps {
 
 const getWarningLabel = (level: number): string => {
   if (level <= 3) return `CHUI ${level}`;
-  if (level === 4) return "HANSOKU";
-  return "HANSOKU CHUI";
+  if (level === 4) return "HANSOKU CHUI";
+  return "HANSOKU";
 };
 
 const PlayerCard = ({
@@ -119,9 +119,9 @@ const PlayerCard = ({
             if (level <= 3) {
               activeColor = "bg-warning-yellow text-black";
             } else if (level === 4) {
-              activeColor = "bg-warning-orange text-white";
-            } else {
               activeColor = "bg-warning-red text-white";
+            } else {
+              activeColor = "bg-warning-orange text-white";
             }
 
             return (
@@ -131,7 +131,7 @@ const PlayerCard = ({
                   isActive ? `${activeColor} warning-active` : bgColor
                 }`}
               >
-                {level <= 3 ? `C${level}` : level === 4 ? "H" : "HC"}
+                {level <= 3 ? `C${level}` : level === 4 ? "HC" : "H"}
               </div>
             );
           })}
@@ -145,8 +145,8 @@ const PlayerCard = ({
                 warnings <= 3
                   ? "bg-warning-yellow text-black"
                   : warnings === 4
-                  ? "bg-warning-orange text-white"
-                  : "bg-warning-red text-white"
+                  ? "bg-warning-red text-white"
+                  : "bg-warning-orange text-white"
               }`}
             >
               {getWarningLabel(warnings)}
